@@ -43,17 +43,24 @@ class MainActivity : ComponentActivity() {
         val direction= remember {
             mutableStateOf("East")
         }
+        val treasureOrStrom= remember {
+            mutableStateOf("")
+        }
         Column(modifier=Modifier.fillMaxSize(), verticalArrangement = Arrangement.Center,
             horizontalAlignment =Alignment.CenterHorizontally) {
             Spacer(modifier = Modifier.height(16.dp))
             Text(text = "Treasure Found : ${treasureFound.value}" )
             Spacer(modifier = Modifier.height(16.dp))
-            Text(text = "Current Directio : ${direction.value}")
+            Text(text = "Current Direction : ${direction.value}")
             Spacer(modifier = Modifier.height(16.dp))
             Button(onClick = {
                 direction.value="East"
                 if(Random.nextBoolean()){
                     treasureFound.value++
+                    treasureOrStrom.value="Treasure"
+                }
+                else{
+                    treasureOrStrom.value="Storm"
                 }
             }) {
                Text( "Sail Toward East")
@@ -63,6 +70,10 @@ class MainActivity : ComponentActivity() {
                 direction.value="West"
                 if(Random.nextBoolean()){
                     treasureFound.value++
+                    treasureOrStrom.value="Treasure"
+                }
+                else{
+                    treasureOrStrom.value="Storm"
                 }
             }) {
                 Text( "Sail Toward West")
@@ -72,6 +83,10 @@ class MainActivity : ComponentActivity() {
                 direction.value="North"
                 if(Random.nextBoolean()){
                     treasureFound.value++
+                    treasureOrStrom.value="Treasure"
+                }
+                else{
+                    treasureOrStrom.value="Storm"
                 }
             }) {
                 Text( "Sail Toward North")
@@ -81,11 +96,16 @@ class MainActivity : ComponentActivity() {
                 direction.value="South"
                 if(Random.nextBoolean()){
                     treasureFound.value++
+                    treasureOrStrom.value="Treasure"
+                }
+                else{
+                    treasureOrStrom.value="Storm"
                 }
             }) {
                 Text( "Sail Toward South")
             }
-
+            Spacer(modifier = Modifier.height(16.dp))
+            Text(text = treasureOrStrom.value)
 
         }
     }
